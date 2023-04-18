@@ -11,7 +11,7 @@
 * The defining features of these datasets are these:
 *
 * stratumid is an integer variable
-* cluterid is an integer variable
+* clusterid is an integer variable
 * The variable specified in the outcome() option is an integer that takes
 * only 3 possible values:
 *   1 if the child had the outcome
@@ -65,8 +65,4 @@ levelsof stratumid, local(slist)
 foreach s in `slist' {
 	ucla_ksph_sim1, dataset(BFASO_2016_RI_ADS) outcome(fully_vaccinated_crude)      stratum(`s') abbrev_dataset(bfaso16) abbrev_outcome(fvc)    title_suffix(- Fully Vxd)
 	ucla_ksph_sim1, dataset(BFASO_2016_RI_ADS) outcome(not_vaccinated_crude)        stratum(`s') abbrev_dataset(bfaso16) abbrev_outcome(nvc)    title_suffix(- Zero Dose)
-}
-
-foreach o in y01 y50a y50b y50c y75a y75b y75c y99 y100 {
-	ucla_ksph_sim1, dataset(survey_with_plausible_yet_perverse_proportions) outcome(`o') stratum(1) abbrev_dataset(faux) abbrev_outcome(`o') title_suffix(- Faux Outcome `o')
 }
