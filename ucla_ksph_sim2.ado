@@ -252,7 +252,8 @@ program define ucla_ksph_sim2
 		  ysize(20) xsize(12) ytitle("N PSUs", size(vsmall)) xtitle("Estimated Coverage (%)", size(vsmall)) `tstring' ///
 		  name(forest, replace)
 
-	graph export forest.png, width(2000) replace
+	graph export forest_`abbrev_dataset'_`abbrev_outcome'_`stratum'.png, width(2000) replace
+	
 	* Make the organ pipe plot
 
 	use datafile_opplot, clear
@@ -270,6 +271,8 @@ program define ucla_ksph_sim2
 
 	use datafile_opplot, clear
 	opplot y, clustvar(clusterid) title(`title', size(medsmall)) subtitle(`subtitle', size(small)) footnote(`sd', size(vsmall)) name(opplot, replace)
+
+	graph export opplot_`abbrev_dataset'_`abbrev_outcome'_`stratum'.png, width(2000) replace
 			
 	* Combine plots and export to png
 	graph combine opplot forest, row(1) name(combo, replace) graphregion(color(white))
