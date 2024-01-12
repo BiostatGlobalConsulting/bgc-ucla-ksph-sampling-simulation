@@ -41,6 +41,8 @@
 * Send questions to Dale.Rhoda@biostatglobal.com
 *
 * Program updated on 2023-07-25 to include LQAS as sampling plan #3.
+* Program updated on 2024-01-12 to export both the opplot and the forest plot 
+* with aspect ratio 4:3.
 *
 ********************************************************************************
 
@@ -249,7 +251,7 @@ program define ucla_ksph_sim2
 		, ///
 		  xlabel(0(20)100, labsize(vsmall)) xline(`phat') legend(off) ///
 		  graphregion(color(white)) plotregion(color(white)) ///
-		  ysize(20) xsize(12) ytitle("N PSUs", size(vsmall)) xtitle("Estimated Coverage (%)", size(vsmall)) `tstring' ///
+		  ysize(20) xsize(15) ytitle("N PSUs", size(vsmall)) xtitle("Estimated Coverage (%)", size(vsmall)) `tstring' ///
 		  name(forest, replace)
 
 	graph export forest_`abbrev_dataset'_`abbrev_outcome'_`stratum'.png, width(2000) replace
@@ -270,7 +272,7 @@ program define ucla_ksph_sim2
 	local subtitle Cvg = `=string(`phat',"%5.1f")'%  ICC = `=string(`icc',"%6.3f")'
 
 	use datafile_opplot, clear
-	opplot y, clustvar(clusterid) title(`title', size(medsmall)) subtitle(`subtitle', size(small)) footnote(`sd', size(vsmall)) name(opplot, replace)
+	opplot y, clustvar(clusterid) title(`title', size(medsmall)) subtitle(`subtitle', size(small)) footnote(`sd', size(vsmall)) ysize(20) xsize(15) name(opplot, replace)
 
 	graph export opplot_`abbrev_dataset'_`abbrev_outcome'_`stratum'.png, width(2000) replace
 			
